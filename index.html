@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My family</title>
+<style>
+    #overlay{
+    position:fixed;
+    inset: 0;
+    background:rgba(0,0,0,.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: zoom-out;
+}
+#bigImage
+{
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.8);
+    animation:zoom .3s ease;
+}
+@keyframes zoom{
+    from{
+        transform: scale(0.8);
+        opacity:0;
+    }
+    to{
+        transform: scale(1);
+        opacity:1;
+    }
+}
+.overlay.show{
+    display:block;
+}
+   body{
+    margin:0;
+    min-height:100vh;
+    background: linear-gradient(
+        -45deg,
+        #00b3ff,
+        #ea00ff,
+        #fbff00,
+        #d21c1c
+    );
+    background-size:400% 400%;
+    animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove{
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+} 
+.myfam{
+    width: 90%;
+    margin: 100px auto;
+    border: 5px solid red;
+    overflow: hidden;
+}
+
+.myfam2{
+    display: flex;
+    gap: 15px;
+    width: max-content;
+    animation: scroll 20s linear infinite;
+}
+
+.myfam2 img{
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid green;
+}
+
+@keyframes scroll{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-50%);
+    }
+}
+.myfam:hover .myfam2{
+    animation-play-state: paused;
+}
+.card
+{
+        height: 5em;
+        padding: 1em;
+        font-size: 3em;
+        border-radius: 2em;
+        text-align: center;
+        align-items: center;
+
+
+}
+@keyframes slide{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(50%);
+    }
+}
+    .photo{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.photo:hover{
+    transform:scale(1.05);
+}
+
+.photo.active{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(2);
+    z-index:1000;
+    max-width:80vw;
+    max-height:80vh;
+    width:auto;
+    height:auto;
+    border-radius:15px;
+    box-shadow:0 0 50px rgba(0,0,0,.8);
+}
+.photo.active{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(2);
+    z-index:99999;
+    cursor:zoom-out;
+}
+.about{
+    color: #000000;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+.time{
+    position: fixed;
+    bottom: 10px;
+    right:10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.date{
+    position: fixed;
+    bottom: 10px;
+    left:10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+</style>
+</head>
+<body>
+    <div id="overlay">
+    <img id="bigImage">
+</div>
+
+<div class="time">
+       <h1 id="time">12:00:00</h1>
+    </div>
+     <div class="date">
+        <h1><span id="dadate"></span></h1>
+    </div>
+
+<h1 class="about">MAY MY HOME ALWAYS BE FILLED WITH PEACE, LOVE, AND HEALTH. MAY EACH MORNING BRING NEW HOPE,AND EACH EVENING BRING COMFORT. MAY UNITY AND UNDERSTANDING ALWAYS BE WITH US, AND MAY EVERY STEP BE RAJSHYMAJI BLESSED. MAY OUR EVERY DAY BE FILLED WITH HAPPINESS.    PREM PRANAM.</h1>
+
+<div class="myfam">
+    <div class="myfam2">
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.6435-9/95322733_3093822927340375_3730886529229258752_n.jpg?stp=dst-jpg_tt6&cstp=mx960x720&ctp=s960x720&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=mlQPkkW9LksQ7kNvwHB0Erw&_nc_oc=Adp5F1Jh3CHY3DLrYikKI54jee5xjki7Gf4m8ynzmFqkzR7osC3QDLl2NoUkOFvruNc&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=F6Wo_BNUxy0cRQ405x5aDw&_nc_ss=7b2a8&oh=00_AQAswjBmNaDHCNzfg0zkdauPxn6rHLqojUnOUbpl67r3UQ&oe=6A7B3FFC" height="200px" width="300px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t1.6435-9/79484091_2776064189116252_1167334031872753664_n.jpg?stp=dst-jpg_tt6&cstp=mx821x960&ctp=s821x960&_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=w9sZ58RhvoQQ7kNvwHKOjms&_nc_oc=AdrohGbMCaJKYSFdITKq6J1B7Q9cCRRLeuVgbtErGE9h7Sg57kP5WaLsJtVd361bemc&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=TkWUYMFytJEUnj2Kcc5F_Q&_nc_ss=7b2a8&oh=00_AQAHk6hOWNC1NPYGT2Txpo1CfC0J2UYyTL-xnIC9hU0QIg&oe=6A7B245F" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646297579_26312195908409749_3679651019268647155_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1535&ctp=s2048x1535&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=jQBQUK9niB8Q7kNvwHE6_hF&_nc_oc=AdqldjmXPlPeLwIUP5kaVv8vWBvWbZZ8dRszzxnVUpHcQq3JVVb6Wk70ztFD2chk3Yg&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=q8g9OAkmZ_7VAkqFoEZptA&_nc_ss=7b2a8&oh=00_AQAFsNmr1wG-E_0bsUzqf7V8oaQCVoq2dMbgBnOko_ArbA&oe=6A59B678" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/597637243_25565280116434669_6249558448435226843_n.jpg?stp=dst-jpg_tt6&cstp=mx595x720&ctp=s595x720&_nc_cat=101&ccb=1-7&_nc_sid=b04a48&_nc_ohc=2xvmeGAh1jwQ7kNvwGS3sbX&_nc_oc=AdqwU_v2Xj2JLG5N23eMaKMdaSPIcybRmC-k1upVuVbvykjI7zI-IECPFqNQStNDUlI&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=dvGgpTB9e9QtPLLsV-qo1w&_nc_ss=7b2a8&oh=00_AQCD8BzYCNZfb6AL1jNvS1-SFqzJs6SUjuEa3BT6buaX3g&oe=6A65D9D6" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/558927184_24965152453114108_6729884542246658839_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1638&ctp=s2048x1638&_nc_cat=109&ccb=1-7&_nc_sid=b04a48&_nc_ohc=kLlolUDuAAAQ7kNvwGCxGsc&_nc_oc=AdqWwXL31Fi7YfRyZi6PsP7PTKpaebMSXh57a3J0wRU_GkT4cSN4w52s_SjWO1vnsqU&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=82wjD6wYXaDkSSJM7MnHmQ&_nc_ss=7b2a8&oh=00_AQButfCDDycQUdduAhk1az44aDF4NP_GIUGRwi_1meVQLg&oe=6A65B8E3" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/641439471_26249912144638126_6148776050827203919_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=106&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=W8Li5KNEpMIQ7kNvwFAFK_n&_nc_oc=AdqbS0SdrlmbQO_tric05jwMHKacoM_k31ilfo-kyIifiwoIP97n5B7-J0oSLUoJGrs&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=ZtNsEU3Dc5IxfjZmlGpiHw&_nc_ss=7b2a8&oh=00_AQBIcCK8iN-sviNVfqLwz9Qovu9SV1dZ9bgrfnffVDJTYg&oe=6A65AE51" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/644182764_26252513471044660_6009731787792664642_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=o6i2ryH8Lr0Q7kNvwHeWSLI&_nc_oc=AdpO5sdAMWljOyZtr-DYecyiAnijT1F5WtkvRYHus-9NPua5enIJpgnK-0o5HEq5ZSY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=Oaq2HZ-yaETpl6rrmtb19A&_nc_ss=7b2a8&oh=00_AQCVDY5U7hEoc_kuFzmbMXOtYN-TabIkWBvrU0dte1BAHQ&oe=6A65E34D" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/647141726_26290301893932484_1360626626921787370_n.jpg?stp=dst-jpg_tt6&cstp=mx852x1136&ctp=s852x1136&_nc_cat=104&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=WxGvSyXrwL0Q7kNvwEgqlbp&_nc_oc=AdrOuE2gYq0UgnA9ZQnyeKPcGzOmLqLcb21DEv_Asj86uzR28bGybN3Rovy5XibtjMY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=3IEkncMUGWW9Z6Ackc3jXQ&_nc_ss=7b2a8&oh=00_AQD18mpl_qFfrrB1rKGgnc3BbQniUTVlRnB0t39qAf_GYg&oe=6A65B7FF" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/643963811_26298578479771492_6082615798755836108_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=103&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=8a7xtBre4-IQ7kNvwFM5olE&_nc_oc=AdoCG1DLi4yCTVHzIRsOHXCJOCP7JLvZGiaFr2FUwZ3LCIzyfwbumImBU9j7NRRbRxQ&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=N4I3S0_MMa3JX6g0qlLA0A&_nc_ss=7b2a8&oh=00_AQDpGHAI-fB5bHzEL93A9saDs35HREFmezUhBWDHUl4eAA&oe=6A65B28D" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/648636447_26307105258918814_634224483599405055_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=CIv6kU2K19MQ7kNvwFmYARl&_nc_oc=Adq-r5220r-R3gbAR803yyNPb3UaHDAMu93XMy5iw72mvanOquyA2RBOVcp8mTkossQ&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=6PeSth8Ol0d-r3Dw7In-eg&_nc_ss=7b2a8&oh=00_AQB9U6D5mc1dCYE_Pun8JuEGX4HEqokeGL8HAqAL4EMsGQ&oe=6A65CB7A" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646297579_26312195908409749_3679651019268647155_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1535&ctp=s2048x1535&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=kFqq98zUvwAQ7kNvwFGTfGh&_nc_oc=AdoKupwtt8Gq3UAXM2Be9CAXBHC08Up3oq_jG_13Q1IguYYJMoU4pZpGM-gPhh-YalQ&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=FU6Xd43nXnMT7lH74y6AEw&_nc_ss=7b2a8&oh=00_AQAsJiQBR_OC-U13WMAwpXtxpwVQoPFzFCrf2MRigLmc7g&oe=6A65CC38" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/646500046_26321333927495947_2049553866831947714_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=TTWEfcSXQ34Q7kNvwHu3Dn-&_nc_oc=AdpguoVqN5tJHlsM1ybRjwYTd1teMKtx5_Xk-oBkFfjJIVOREaWLJpK3thQkqw1QkpM&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=Zk2SW6PjAqBwpQVWUyCRZw&_nc_ss=7b2a8&oh=00_AQCOCHWHPy1wcOI3GAXwjyTn2zdVubHCAwLPUI6KaDPnZQ&oe=6A65AE7D" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/647728713_26321100310852642_1457669952634278640_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x2002&ctp=s2048x2002&_nc_cat=110&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=reYTnK5aAPkQ7kNvwFONyC4&_nc_oc=AdohOe-jc8p5LT98aPMs-ogIQ17aENpSkpzskGXZ3RCiKGVHUDWc1IN7FqMli4VsLh4&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=U4i-PPU1Cw4NPVm1TsBpgw&_nc_ss=7b2a8&oh=00_AQB6LtjEGuzU1M1jzR1breng3BOpoovLSy6WIupIEfQtVA&oe=6A65C07C" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646387879_26323738043922202_2901732819255406332_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1684&ctp=s2048x1684&_nc_cat=101&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=zXL9sLHzwM4Q7kNvwFmOUJM&_nc_oc=AdonEb8ptFdwxdFWnjpY_pFaH6iEWM4PuJecVtkERg_LG0uHOQddzCBf9h_Bnd6rKgE&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=KTH4TlH7pDggS2glqED7tw&_nc_ss=7b2a8&oh=00_AQCJ6XkPa6jjbSu50mdL3O4tT4VrvUl_m7i70qUqpHAUBA&oe=6A65D5FE" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/490570320_9812054968850437_5435472928682342442_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx719x545&ctp=s719x545&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=vwEys0PPbLUQ7kNvwHNE1aO&_nc_oc=AdoOeEP65mnKsxA8UbwnfckyPk38-VaSUelso11b_mnPRo_QOAYbTuPWdkA99llP98U&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=8FqRsjey_cEM0tcZZOIYTw&_nc_ss=7b2a8&oh=00_AQA2Y9xLqURhtAjGgxR9d6b5h9aKXIQiGjTYdh5FaxIpDA&oe=6A65B3B0" height="200px" width="250px">
+        </div>
+        <div>
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/246041877_4644811635574822_111909297884825786_n.jpg?stp=dst-jpg_tt6&cstp=mx714x713&ctp=s714x713&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=koTVbDEQDLcQ7kNvwF-xEGw&_nc_oc=Adp6THSOChmnGOuOtBRvWR704y3YBbZAnoOgArSsjFf5UNYGyGsiNz-_WmgFPsFiYjU&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=CTcQR8kbmZBc9QADY-o9rw&_nc_ss=7b2a8&oh=00_AQDQQZ0ce2VN5Kcy0mkcAs6Zbi9VbVQT1SVyl9YHhk-rMw&oe=6A65A26A" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.6435-9/95322733_3093822927340375_3730886529229258752_n.jpg?stp=dst-jpg_tt6&cstp=mx960x720&ctp=s960x720&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=mlQPkkW9LksQ7kNvwHB0Erw&_nc_oc=Adp5F1Jh3CHY3DLrYikKI54jee5xjki7Gf4m8ynzmFqkzR7osC3QDLl2NoUkOFvruNc&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=F6Wo_BNUxy0cRQ405x5aDw&_nc_ss=7b2a8&oh=00_AQAswjBmNaDHCNzfg0zkdauPxn6rHLqojUnOUbpl67r3UQ&oe=6A7B3FFC" height="200px" width="300px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t1.6435-9/79484091_2776064189116252_1167334031872753664_n.jpg?stp=dst-jpg_tt6&cstp=mx821x960&ctp=s821x960&_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=w9sZ58RhvoQQ7kNvwHKOjms&_nc_oc=AdrohGbMCaJKYSFdITKq6J1B7Q9cCRRLeuVgbtErGE9h7Sg57kP5WaLsJtVd361bemc&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=TkWUYMFytJEUnj2Kcc5F_Q&_nc_ss=7b2a8&oh=00_AQAHk6hOWNC1NPYGT2Txpo1CfC0J2UYyTL-xnIC9hU0QIg&oe=6A7B245F" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646297579_26312195908409749_3679651019268647155_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1535&ctp=s2048x1535&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=jQBQUK9niB8Q7kNvwHE6_hF&_nc_oc=AdqldjmXPlPeLwIUP5kaVv8vWBvWbZZ8dRszzxnVUpHcQq3JVVb6Wk70ztFD2chk3Yg&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=q8g9OAkmZ_7VAkqFoEZptA&_nc_ss=7b2a8&oh=00_AQAFsNmr1wG-E_0bsUzqf7V8oaQCVoq2dMbgBnOko_ArbA&oe=6A59B678" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/618300230_25647484324938275_5344263036421444305_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1693x2048&ctp=s1693x2048&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Pphpm5YXnxYQ7kNvwHvhcPk&_nc_oc=AdqsrR47ro040ItIeSJGW3rM6-KDhxb4sLtXTCzydx6cLhSOmzIh525GrYhMFzUGcr0&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=rEHvQnchAHLyUhskZ5wI7Q&_nc_ss=7b2a8&oh=00_AQBUzosaxC5rmqv_LQ8SfjmPK5pygcUe0Z4kl3Qi9_McCA&oe=6A599B53" height="200px" width="250px">
+        </div>
+        <div>
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/246041877_4644811635574822_111909297884825786_n.jpg?stp=dst-jpg_tt6&cstp=mx714x713&ctp=s714x713&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=koTVbDEQDLcQ7kNvwF-xEGw&_nc_oc=Adp6THSOChmnGOuOtBRvWR704y3YBbZAnoOgArSsjFf5UNYGyGsiNz-_WmgFPsFiYjU&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=CTcQR8kbmZBc9QADY-o9rw&_nc_ss=7b2a8&oh=00_AQDQQZ0ce2VN5Kcy0mkcAs6Zbi9VbVQT1SVyl9YHhk-rMw&oe=6A65A26A" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/597637243_25565280116434669_6249558448435226843_n.jpg?stp=dst-jpg_tt6&cstp=mx595x720&ctp=s595x720&_nc_cat=101&ccb=1-7&_nc_sid=b04a48&_nc_ohc=2xvmeGAh1jwQ7kNvwGS3sbX&_nc_oc=AdqwU_v2Xj2JLG5N23eMaKMdaSPIcybRmC-k1upVuVbvykjI7zI-IECPFqNQStNDUlI&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=dvGgpTB9e9QtPLLsV-qo1w&_nc_ss=7b2a8&oh=00_AQCD8BzYCNZfb6AL1jNvS1-SFqzJs6SUjuEa3BT6buaX3g&oe=6A65D9D6" height="200px" width="250px">
+        </div>
+         <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/558927184_24965152453114108_6729884542246658839_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1638&ctp=s2048x1638&_nc_cat=109&ccb=1-7&_nc_sid=b04a48&_nc_ohc=kLlolUDuAAAQ7kNvwGCxGsc&_nc_oc=AdqWwXL31Fi7YfRyZi6PsP7PTKpaebMSXh57a3J0wRU_GkT4cSN4w52s_SjWO1vnsqU&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=82wjD6wYXaDkSSJM7MnHmQ&_nc_ss=7b2a8&oh=00_AQButfCDDycQUdduAhk1az44aDF4NP_GIUGRwi_1meVQLg&oe=6A65B8E3" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/641439471_26249912144638126_6148776050827203919_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=106&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=W8Li5KNEpMIQ7kNvwFAFK_n&_nc_oc=AdqbS0SdrlmbQO_tric05jwMHKacoM_k31ilfo-kyIifiwoIP97n5B7-J0oSLUoJGrs&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=ZtNsEU3Dc5IxfjZmlGpiHw&_nc_ss=7b2a8&oh=00_AQBIcCK8iN-sviNVfqLwz9Qovu9SV1dZ9bgrfnffVDJTYg&oe=6A65AE51" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/644182764_26252513471044660_6009731787792664642_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=o6i2ryH8Lr0Q7kNvwHeWSLI&_nc_oc=AdpO5sdAMWljOyZtr-DYecyiAnijT1F5WtkvRYHus-9NPua5enIJpgnK-0o5HEq5ZSY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=Oaq2HZ-yaETpl6rrmtb19A&_nc_ss=7b2a8&oh=00_AQCVDY5U7hEoc_kuFzmbMXOtYN-TabIkWBvrU0dte1BAHQ&oe=6A65E34D" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/647141726_26290301893932484_1360626626921787370_n.jpg?stp=dst-jpg_tt6&cstp=mx852x1136&ctp=s852x1136&_nc_cat=104&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=WxGvSyXrwL0Q7kNvwEgqlbp&_nc_oc=AdrOuE2gYq0UgnA9ZQnyeKPcGzOmLqLcb21DEv_Asj86uzR28bGybN3Rovy5XibtjMY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=3IEkncMUGWW9Z6Ackc3jXQ&_nc_ss=7b2a8&oh=00_AQD18mpl_qFfrrB1rKGgnc3BbQniUTVlRnB0t39qAf_GYg&oe=6A65B7FF" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/643963811_26298578479771492_6082615798755836108_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=103&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=8a7xtBre4-IQ7kNvwFM5olE&_nc_oc=AdoCG1DLi4yCTVHzIRsOHXCJOCP7JLvZGiaFr2FUwZ3LCIzyfwbumImBU9j7NRRbRxQ&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=N4I3S0_MMa3JX6g0qlLA0A&_nc_ss=7b2a8&oh=00_AQDpGHAI-fB5bHzEL93A9saDs35HREFmezUhBWDHUl4eAA&oe=6A65B28D" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/648636447_26307105258918814_634224483599405055_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=CIv6kU2K19MQ7kNvwFmYARl&_nc_oc=Adq-r5220r-R3gbAR803yyNPb3UaHDAMu93XMy5iw72mvanOquyA2RBOVcp8mTkossQ&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=6PeSth8Ol0d-r3Dw7In-eg&_nc_ss=7b2a8&oh=00_AQB9U6D5mc1dCYE_Pun8JuEGX4HEqokeGL8HAqAL4EMsGQ&oe=6A65CB7A" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646297579_26312195908409749_3679651019268647155_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1535&ctp=s2048x1535&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=kFqq98zUvwAQ7kNvwFGTfGh&_nc_oc=AdoKupwtt8Gq3UAXM2Be9CAXBHC08Up3oq_jG_13Q1IguYYJMoU4pZpGM-gPhh-YalQ&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=FU6Xd43nXnMT7lH74y6AEw&_nc_ss=7b2a8&oh=00_AQAsJiQBR_OC-U13WMAwpXtxpwVQoPFzFCrf2MRigLmc7g&oe=6A65CC38" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/646500046_26321333927495947_2049553866831947714_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=TTWEfcSXQ34Q7kNvwHu3Dn-&_nc_oc=AdpguoVqN5tJHlsM1ybRjwYTd1teMKtx5_Xk-oBkFfjJIVOREaWLJpK3thQkqw1QkpM&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=Zk2SW6PjAqBwpQVWUyCRZw&_nc_ss=7b2a8&oh=00_AQCOCHWHPy1wcOI3GAXwjyTn2zdVubHCAwLPUI6KaDPnZQ&oe=6A65AE7D" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/647728713_26321100310852642_1457669952634278640_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x2002&ctp=s2048x2002&_nc_cat=110&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=reYTnK5aAPkQ7kNvwFONyC4&_nc_oc=AdohOe-jc8p5LT98aPMs-ogIQ17aENpSkpzskGXZ3RCiKGVHUDWc1IN7FqMli4VsLh4&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=U4i-PPU1Cw4NPVm1TsBpgw&_nc_ss=7b2a8&oh=00_AQB6LtjEGuzU1M1jzR1breng3BOpoovLSy6WIupIEfQtVA&oe=6A65C07C" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646387879_26323738043922202_2901732819255406332_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1684&ctp=s2048x1684&_nc_cat=101&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=zXL9sLHzwM4Q7kNvwFmOUJM&_nc_oc=AdonEb8ptFdwxdFWnjpY_pFaH6iEWM4PuJecVtkERg_LG0uHOQddzCBf9h_Bnd6rKgE&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=KTH4TlH7pDggS2glqED7tw&_nc_ss=7b2a8&oh=00_AQCJ6XkPa6jjbSu50mdL3O4tT4VrvUl_m7i70qUqpHAUBA&oe=6A65D5FE" height="200px" width="250px">
+        </div>
+        <div class="cards">
+            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/490570320_9812054968850437_5435472928682342442_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx719x545&ctp=s719x545&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=vwEys0PPbLUQ7kNvwHNE1aO&_nc_oc=AdoOeEP65mnKsxA8UbwnfckyPk38-VaSUelso11b_mnPRo_QOAYbTuPWdkA99llP98U&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=8FqRsjey_cEM0tcZZOIYTw&_nc_ss=7b2a8&oh=00_AQA2Y9xLqURhtAjGgxR9d6b5h9aKXIQiGjTYdh5FaxIpDA&oe=6A65B3B0" height="200px" width="250px">
+        </div>
+    </div>
+</div>
+
+<script>
+const photos = document.querySelectorAll(".photo");
+const overlay = document.getElementById("overlay");
+const bigImage = document.getElementById("bigImage");
+const slider = document.querySelector(".myfam2");
+
+
+photos.forEach(photo => {
+
+    photo.addEventListener("click", () => {
+
+        bigImage.src = photo.src;
+
+        overlay.style.display = "flex";
+
+        slider.style.animationPlayState = "paused";
+
+    });
+
+});
+
+
+overlay.addEventListener("click", () => {
+
+    overlay.style.display = "none";
+
+    slider.style.animationPlayState = "running";
+
+});
+function updateClock() {
+    time.innerHTML = new Date().toLocaleTimeString();
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+const today = new Date ();
+
+const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+};
+
+document.getElementById("dadate").textContent =
+today.toLocaleDateString('en-us', options);
+</script>
+
+
+</script>
+</body>
+</html>
