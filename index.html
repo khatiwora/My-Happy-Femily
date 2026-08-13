@@ -1,336 +1,1852 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My family</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Religion Quiz</title>
+
 <style>
-    #overlay{
-    position:fixed;
-    inset: 0;
-    background:rgba(0,0,0,.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    cursor: zoom-out;
-}
-#bigImage
-{
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.8);
-    animation:zoom .3s ease;
-}
-@keyframes zoom{
-    from{
-        transform: scale(0.8);
-        opacity:0;
-    }
-    to{
-        transform: scale(1);
-        opacity:1;
-    }
-}
-.overlay.show{
-    display:block;
-}
-   body{
-    margin:0;
-    min-height:100vh;
-    background: linear-gradient(
-        -45deg,
-        #00b3ff,
-        #ea00ff,
-        #fbff00,
-        #d21c1c
-    );
-    background-size:400% 400%;
-    animation: gradientMove 10s ease infinite;
+
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:"Segoe UI", Arial, sans-serif;
 }
 
-@keyframes gradientMove{
-    0%{
-        background-position:0% 50%;
-    }
-    50%{
-        background-position:100% 50%;
-    }
-    100%{
-        background-position:0% 50%;
-    }
-} 
-.myfam{
-    width: 90%;
-    margin: 100px auto;
-    border: 5px solid red;
-    overflow: hidden;
+
+body{
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+
+ background:linear-gradient(
+ -45deg,
+ #002fff,
+ #ff0000,
+ #eeff00,
+ #00ff88,
+ #002fff
+ );
+
+ background-size:400% 400%;
+
+ animation:gradientMove 12s ease infinite;
 }
 
-.myfam2{
-    display: flex;
-    gap: 15px;
-    width: max-content;
-    animation: scroll 20s linear infinite;
+
+.container{
+ background:white;
+ width:750px;
+ max-width:90%;
+ padding:40px;
+ border-radius:25px;
+ box-shadow:0 20px 50px rgba(0,0,0,.3);
+ animation:appear .5s ease;
 }
 
-.myfam2 img{
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid green;
-}
 
-@keyframes scroll{
-    from{
-        transform: translateX(0);
-    }
-    to{
-        transform: translateX(-50%);
-    }
-}
-.myfam:hover .myfam2{
-    animation-play-state: paused;
-}
-.card
-{
-        height: 5em;
-        padding: 1em;
-        font-size: 3em;
-        border-radius: 2em;
-        text-align: center;
-        align-items: center;
+@keyframes appear{
 
+ from{
+ opacity:0;
+ transform:scale(.8);
+ }
+
+ to{
+ opacity:1;
+ transform:scale(1);
+ }
 
 }
+
+
+
+.quiz-header {
+ text-align: center;
+ margin: 0 0 25px;
+ padding-top: 0;
+}
+@media (max-width: 600px) {
+ .quizImages img {
+ width: 60px;
+ height: 70px;
+ }
+
+ .quiz-header h1 {
+ font-size: 26px;
+ }
+}
+
+.quiz-header h1 {
+ font-size: 40px;
+}
+
+.quiz-header p{
+
+ color:#777;
+ font-size:18px;
+
+}
+
+
+
+.progress{
+
+ width:100%;
+ height:12px;
+ background:#ddd;
+ border-radius:20px;
+ overflow:hidden;
+ margin:20px 0;
+
+}
+
+
+#progressBar{
+
+ display:block;
+ height:100%;
+ width:0%;
+ background:linear-gradient(90deg,#667eea,#764ba2);
+ transition:.5s;
+
+}
+
+
+.progress {
+ margin: 10px 0 6px;
+}
+
+.timer {
+ margin-top: 4px;
+ margin-right: 20px;
+ margin-bottom: 2px;
+}
+
+.counter {
+ color:#fdfdfd;
+ margin-top: 4px;
+ margin-bottom: 8px;
+}
+
+#quizArea {
+ margin-top: 10px;
+}
+.counter{
+ text-align:center;
+ font-weight:bold;
+ color:#ffffff;
+ margin-top:5px;
+ margin-bottom:15px;
+}
+
+#quizArea{
+ margin-top:25px;
+}
+
+.timer{
+ position:relative;
+ text-align:right;
+ margin-top:15px;
+ margin-right:20px;
+ font-size:18px;
+ font-weight:bold;
+}
+
+.timer.warning{
+ color: red;
+ animation: pulse .5s infinite;
+}
+
+.right-panel{
+ position:absolute;
+ top:15px;
+ right:15px;
+ z-index:1;
+}
+
+.quizImages {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 12px;
+ margin-bottom: 15px;
+ 
+}
+
+.leftLogo{
+ left:20px;
+}
+
+.centerLogo{
+ left:50%;
+ transform:translateX(-50%);
+}
+
+.rightLogo{
+ right:20px;
+}
+.quiz-header{
+ padding-top:130px;
+}
+
+@keyframes pulse{
+
+ 50%{
+ transform:scale(1.1);
+ }
+
+}
+
+
+
+
+.question{
+
+ background:#f8f9ff;
+ padding:25px;
+ border-radius:18px;
+ border-left:6px solid #667eea;
+ animation:slide .4s ease;
+
+}
+
+
 @keyframes slide{
-    from{
-        transform: translateX(0);
-    }
-    to{
-        transform: translateX(50%);
-    }
-}
-    .photo{
-    cursor:pointer;
-    transition:0.3s;
+
+ from{
+ opacity:0;
+ transform:translateX(50px);
+ }
+
+ to{
+ opacity:1;
+ transform:translateX(0);
+ }
+
 }
 
-.photo:hover{
-    transform:scale(1.05);
+
+
+.question h2{
+
+ text-align:center;
+ color:#333;
+ margin-bottom:20px;
+
 }
 
-.photo.active{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) scale(2);
-    z-index:1000;
-    max-width:80vw;
-    max-height:80vh;
-    width:auto;
-    height:auto;
-    border-radius:15px;
-    box-shadow:0 0 50px rgba(0,0,0,.8);
+
+
+.option{
+
+ display:flex;
+ align-items:center;
+ background:white;
+ padding:15px;
+ margin:12px 0;
+ border-radius:12px;
+ border:2px solid #ddd;
+ cursor:pointer;
+ transition:.3s;
+ font-size:18px;
+
 }
-.photo.active{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) scale(2);
-    z-index:99999;
-    cursor:zoom-out;
+
+
+.option:hover{
+
+ border-color:#667eea;
+ transform:translateX(8px);
+
 }
-.about{
-    color: #000000;
-    text-align: center;
-    font-family: 'Courier New', Courier, monospace;
+
+
+input{
+
+ width:20px;
+ height:20px;
+ margin-right:15px;
+
 }
-.time{
-    position: fixed;
-    bottom: 10px;
-    right:10px;
-    font-family: 'Courier New', Courier, monospace;
+
+
+
+button{
+
+ width:90%;
+ margin-top:1px;
+ padding:18px;
+
+ border:none;
+ border-radius:15px;
+
+ background:linear-gradient(135deg,#667eea,#764ba2);
+
+ color:white;
+ font-size:20px;
+ font-weight:bold;
+
+ cursor:pointer;
+ transition:.3s;
+
 }
-.date{
-    position: fixed;
-    bottom: 10px;
-    left:10px;
-    font-family: 'Courier New', Courier, monospace;
+
+
+
+button:hover{
+
+ transform:translateY(-4px);
+ box-shadow:0 10px 25px rgba(0,0,0,.3);
+
+}
+
+
+
+
+.feedback{
+
+ position:fixed;
+ inset:0;
+z-index: 10;
+
+ display:flex;
+ justify-content:center;
+ align-items:center;
+
+ font-size:50px;
+ font-weight:bold;
+
+ color:rgb(255, 255, 255);
+
+ opacity:0;
+ pointer-events:none;
+
+ transition:.3s;
+
+}
+
+
+
+.feedback.show{
+
+ opacity:1;
+
+}
+
+
+
+.correct{
+
+ background:rgba(0,200,80,.9);
+
+}
+
+
+
+.wrong{
+
+ background:rgba(255,0,0,.9);
+
+}
+
+
+
+
+.shake{
+
+ animation:shake .4s;
+
+}
+
+
+
+@keyframes shake{
+
+ 25%{
+ transform:translateX(-10px);
+ }
+
+ 50%{
+ transform:translateX(10px);
+ }
+
+ 75%{
+ transform:translateX(-10px);
+ }
+
+}
+@keyframes gradientMove{
+
+ 0%{
+ background-position:0% 50%;
+ }
+
+ 50%{
+ background-position:100% 50%;
+ }
+
+ 100%{
+ background-position:0% 50%;
+ }
+
+}
+
+
+.confetti{
+
+ position:fixed;
+ width:12px;
+ height:12px;
+ top:-20px;
+
+ animation:fall 2s linear forwards;
+
+}
+
+.right-panel{
+ z-index:1;
+}
+
+#darkButton{
+ z-index:5;
+}
+
+@keyframes fall{
+
+ to{
+
+ transform:translateY(100vh) rotate(720deg);
+ opacity:0;
+
+ }
+
+}
+
+.result{
+
+ text-align:center;
+
+}
+
+
+.score-circle{
+
+ width:180px;
+ height:180px;
+
+ margin:25px auto;
+
+ border-radius:50%;
+
+ background:linear-gradient(135deg,#667eea,#764ba2);
+
+ color:white;
+
+ display:flex;
+ justify-content:center;
+ align-items:center;
+
+ font-size:45px;
+ font-weight:bold;
+
+}
+
+
+#leaderboard p{
+
+ background:#f1f1f1;
+ padding:10px;
+ border-radius:10px;
+ margin:8px;
+
+}
+.dark{
+ background:#121212;
+}
+
+
+.dark .container{
+ background:#1e1e1e;
+ color:white;
+}
+
+
+.dark h1,
+.dark h2,
+.dark p{
+ color:white;
+}
+
+
+.dark .question{
+ background:#292929;
+}
+
+
+.dark .option{
+ background:#333;
+ color:white;
+ border-color:#555;
+}
+
+
+.dark .option:hover{
+ background:#444;
+}
+
+
+#darkButton{
+ position:absolute;
+ top:20px;
+ right:20px;
+
+ width:45px;
+ height:45px;
+
+ border:none;
+ border-radius:50%;
+
+ background:#f1f1f1;
+ color:#333;
+
+ font-size:20px;
+ cursor:pointer;
+
+ display:flex;
+ justify-content:center;
+ align-items:center;
+
+ box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+
+#darkButton:hover{
+ transform:scale(1.1);
+ background:#e4e4e4;
+}
+
+.dark #darkButton{
+ background:#333;
+ color:#fff;
+}
+#background{
+ position:fixed;
+ inset:0;
+ overflow:hidden;
+ z-index:0;
+}
+
+.circle{
+ position:absolute;
+ border-radius:50%;
+ filter:blur(8px);
+ opacity:.45;
+ animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+
+ from{
+ transform:translateY(110vh);
+ }
+
+ to{
+ transform:translateY(-120vh);
+ }
+
+}
+#startScreen input{
+ width: 100%;
+ padding: 15px;
+ margin: 12px 0;
+ font-size: 18px;
+ border-radius: 12px;
+ border: 2px solid #c7ea48;
+ outline: none;
+ transition: .3s;
+}
+
+#startScreen input:focus{
+ border-color: #667eea;
+ box-shadow: 0 0 10px rgba(102,126,234,.4);
+}
+#startScreen input{
+ width:90%;
+ height:60px;
+ padding:15px;
+ margin:15px auto;
+ display:block;
+ font-size:22px;
+ border-radius:15px;
+ border:2px solid #e3bd5e;
+ background-color: orange;
+}
+#startScreen{
+ text-align:center;
+}
+.background-text{
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ overflow:hidden;
+ z-index:-1;
+ pointer-events:none;
+}
+
+.moving-text{
+ position:absolute;
+ color:rgba(255,255,255,.35);
+ font-size:50px;
+ font-weight:bold;
+ white-space:nowrap;
+ animation:moveText linear infinite;
+}
+
+
+@keyframes moveText{
+
+ from{
+ transform:translateX(-100%);
+ }
+
+ to{
+ transform:translateX(100vw);
+ }
+
+}
+#movingText{
+ position:fixed;
+ top:50%;
+ left:0;
+ width:200%;
+ font-size:80px;
+ font-weight:bold;
+ color:rgba(255,255,255,.25);
+ white-space:nowrap;
+ animation:moveText 15s linear infinite;
+ z-index:-1;
+ color:rgba(255,255,255,.25);
+}
+
+
+@keyframes moveText{
+
+ from{
+ transform:translateX(0);
+ }
+
+ to{
+ transform:translateX(-50%);
+ }
+
+}
+#floatingText{
+ position:fixed;
+ inset:0;
+ overflow:hidden;
+ z-index:0;
+ pointer-events:none;
+}
+
+
+#floatingText span{
+ position:absolute;
+ bottom:-100px;
+ font-size:50px;
+ font-weight:bold;
+ color:rgb(4, 255, 0);
+ white-space:nowrap;
+ animation:floatText 12s linear infinite;
+}
+
+#floatingText span:nth-child(1){
+ left:10%;
+ animation-delay:0s;
+}
+
+#floatingText span:nth-child(2){
+ left:40%;
+ animation-delay:3s;
+}
+
+#floatingText span:nth-child(3){
+ left:70%;
+ animation-delay:6s;
+}
+
+#floatingText span:nth-child(4){
+ left:85%;
+ animation-delay:9s;
+}
+
+
+@keyframes floatText{
+
+ from{
+ transform:translateY(0);
+ opacity:0;
+ }
+
+ 20%{
+ opacity:1;
+ }
+
+ to{
+ transform:translateY(-120vh);
+ opacity:0;
+ }
+
+}
+.container{
+ position:relative;
+ z-index:2;
+}
+.infoRow{
+ display:flex;
+ justify-content:center;
+ gap:15px;
+ margin:15px 0;
+}
+
+
+#playerAge{
+ width: 150px !important;
+}
+
+
+#playerplace{
+ width:250px !important;
+}
+.infoRow{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:15px;
+}
+
+
+.infoRow input:first-child{
+ width:120px;
+}
+
+
+.infoRow input:last-child{
+ width:300px;
+}
+.quizImages img {
+ position: static; /* prevents overlap */
+ width: 90px;
+ height: 100px;
+ object-fit: contain;
+ border-radius: 10px;
+ border: 3px solid #ff0000;
+}
+.quizImages {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 12px;
+ margin-bottom: 5px; /* closer to the quiz title */
+}
+
+.quizImages img {
+ position: static;
+ width: 115px; /* bigger */
+ height: 120px; /* bigger */
+ object-fit: contain;
+}
+
+.quiz-header {
+ text-align: center;
+ margin: 0 0 25px;
+ padding-top: 0;
+}
+.leftLogo{
+ top:15px;
+ left:15px;
+}
+#quizScreen{
+ position:relative;
+}
+
+.centerLogo {
+ justify-self: center;
+ transform: none;
+}
+.rightLogo {
+ justify-self: end;
+}
+/* Final quiz-header layout */
+.quizImages {
+ display: grid;
+ grid-template-columns: 1fr auto 1fr;
+ align-items: center;
+ gap: 12px;
+ margin-bottom: 4px;
+}
+
+.quizImages img {
+ position: static;
+ width: 115px;
+ height: 120px;
+ object-fit: contain;
+}
+
+.leftLogo {
+ justify-self: start;
+}
+
+.centerLogo {
+ justify-self: center;
+ left: auto;
+ transform: none;
+}
+
+.rightLogo {
+ justify-self: end;
+}
+
+.quiz-header {
+ text-align: center;
+ padding-top: 0;
+ margin: 0 0 10px;
+}
+
+.progress {
+ margin: 6px 0 4px;
+}
+
+.timer {
+ margin: 3px 20px 1px 0;
+}
+
+.counter {
+ margin: 2px 0 6px; /* close to progress bar, no overlap */
+}
+
+#quizArea {
+ margin-top: 8px;
+}
+.timer {
+ color: green;
+}
+
+.timer.warning {
+ color: red;
+ animation: pulse .5s infinite;
+}
+/* Move the quiz content upward */
+#quizScreen {
+ margin-top: -25px;
+}
+
+/* Bring the question box closer to the counter */
+#quizArea {
+ margin-top: 2px;
+}
+.container {
+ background: linear-gradient(to bottom, #01adfcf9, #f285c3);
+}
+.quizImages img {
+ border: 3px solid #ff0d00;
+ border-radius: 12px;
+ padding: 4px;
+ background: rgb(247, 107, 107);
+}
+#darkButton {
+ position: absolute;
+ top: 639px; /* adjust this number if needed */
+ right: 0;
+ width: 45px;
+ height: 45px;
+ margin: 0;
+}
+.correct-answer {
+ background: #b9f6ca !important;
+ border-color: #16a34a !important;
+ color: #14532d;
+ font-weight: bold;
+}
+.local-time {
+ text-align: right;
+ margin-right: 20px;
+ color: white;
+ font-weight: bold;
 }
 </style>
+
 </head>
+
 <body>
-    <div id="overlay">
-    <img id="bigImage">
+<div id="background"></div>
+
+
+
+<div id="floatingText">
+ <span>🙏 Pranam</span>
+ <span> Rajshyamaji</span>
+ <span>🙏 Pranam</span>
+ <span> Rajshyamaji</span>
 </div>
 
-<div class="time">
-       <h1 id="time">12:00:00</h1>
-    </div>
-     <div class="date">
-        <h1><span id="dadate"></span></h1>
-    </div>
 
-<h1 class="about">MAY MY HOME ALWAYS BE FILLED WITH PEACE, LOVE, AND HEALTH. MAY EACH MORNING BRING NEW HOPE,AND EACH EVENING BRING COMFORT. MAY UNITY AND UNDERSTANDING ALWAYS BE WITH US, AND MAY EVERY STEP BE RAJSHYMAJI BLESSED. MAY OUR EVERY DAY BE FILLED WITH HAPPINESS.    PREM PRANAM.</h1>
+<div class="feedback" id="feedback"></div>
 
-<div class="myfam">
-    <div class="myfam2">
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.6435-9/95322733_3093822927340375_3730886529229258752_n.jpg?stp=dst-jpg_tt6&cstp=mx960x720&ctp=s960x720&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=mlQPkkW9LksQ7kNvwHB0Erw&_nc_oc=Adp5F1Jh3CHY3DLrYikKI54jee5xjki7Gf4m8ynzmFqkzR7osC3QDLl2NoUkOFvruNc&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=F6Wo_BNUxy0cRQ405x5aDw&_nc_ss=7b2a8&oh=00_AQAswjBmNaDHCNzfg0zkdauPxn6rHLqojUnOUbpl67r3UQ&oe=6A7B3FFC" height="200px" width="300px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t1.6435-9/79484091_2776064189116252_1167334031872753664_n.jpg?stp=dst-jpg_tt6&cstp=mx821x960&ctp=s821x960&_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=w9sZ58RhvoQQ7kNvwHKOjms&_nc_oc=AdrohGbMCaJKYSFdITKq6J1B7Q9cCRRLeuVgbtErGE9h7Sg57kP5WaLsJtVd361bemc&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=TkWUYMFytJEUnj2Kcc5F_Q&_nc_ss=7b2a8&oh=00_AQAHk6hOWNC1NPYGT2Txpo1CfC0J2UYyTL-xnIC9hU0QIg&oe=6A7B245F" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/743082373_27783530514609607_2936798934221009865_n.jpg?stp=dst-jpg_tt6&cstp=mx720x527&ctp=s720x527&_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=J9sRcSEoeuIQ7kNvwHLRRYj&_nc_oc=AdpiPhfQkq2S_m_Vk4-ioqgyHh7-jnPa0zpxslaU-lBcPdDZDC-bRVYXJufANZbq6Cs&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=pnlBRXk0iQjMg1RxhgU30Q&_nc_ss=7b2a8&oh=00_AQBA6bwfDKGSriDEkw0vfHfjFO9jKxbt6CjtfusRTFWynQ&oe=6A6958BF" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/597637243_25565280116434669_6249558448435226843_n.jpg?stp=dst-jpg_tt6&cstp=mx595x720&ctp=s595x720&_nc_cat=101&ccb=1-7&_nc_sid=b04a48&_nc_ohc=2xvmeGAh1jwQ7kNvwGS3sbX&_nc_oc=AdqwU_v2Xj2JLG5N23eMaKMdaSPIcybRmC-k1upVuVbvykjI7zI-IECPFqNQStNDUlI&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=dvGgpTB9e9QtPLLsV-qo1w&_nc_ss=7b2a8&oh=00_AQCD8BzYCNZfb6AL1jNvS1-SFqzJs6SUjuEa3BT6buaX3g&oe=6A65D9D6" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/558927184_24965152453114108_6729884542246658839_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1638&ctp=s2048x1638&_nc_cat=109&ccb=1-7&_nc_sid=b04a48&_nc_ohc=kLlolUDuAAAQ7kNvwGCxGsc&_nc_oc=AdqWwXL31Fi7YfRyZi6PsP7PTKpaebMSXh57a3J0wRU_GkT4cSN4w52s_SjWO1vnsqU&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=82wjD6wYXaDkSSJM7MnHmQ&_nc_ss=7b2a8&oh=00_AQButfCDDycQUdduAhk1az44aDF4NP_GIUGRwi_1meVQLg&oe=6A65B8E3" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/641439471_26249912144638126_6148776050827203919_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=106&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=W8Li5KNEpMIQ7kNvwFAFK_n&_nc_oc=AdqbS0SdrlmbQO_tric05jwMHKacoM_k31ilfo-kyIifiwoIP97n5B7-J0oSLUoJGrs&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=ZtNsEU3Dc5IxfjZmlGpiHw&_nc_ss=7b2a8&oh=00_AQBIcCK8iN-sviNVfqLwz9Qovu9SV1dZ9bgrfnffVDJTYg&oe=6A65AE51" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/644182764_26252513471044660_6009731787792664642_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=o6i2ryH8Lr0Q7kNvwHeWSLI&_nc_oc=AdpO5sdAMWljOyZtr-DYecyiAnijT1F5WtkvRYHus-9NPua5enIJpgnK-0o5HEq5ZSY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=Oaq2HZ-yaETpl6rrmtb19A&_nc_ss=7b2a8&oh=00_AQCVDY5U7hEoc_kuFzmbMXOtYN-TabIkWBvrU0dte1BAHQ&oe=6A65E34D" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/647141726_26290301893932484_1360626626921787370_n.jpg?stp=dst-jpg_tt6&cstp=mx852x1136&ctp=s852x1136&_nc_cat=104&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=WxGvSyXrwL0Q7kNvwEgqlbp&_nc_oc=AdrOuE2gYq0UgnA9ZQnyeKPcGzOmLqLcb21DEv_Asj86uzR28bGybN3Rovy5XibtjMY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=3IEkncMUGWW9Z6Ackc3jXQ&_nc_ss=7b2a8&oh=00_AQD18mpl_qFfrrB1rKGgnc3BbQniUTVlRnB0t39qAf_GYg&oe=6A65B7FF" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/643963811_26298578479771492_6082615798755836108_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=103&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=8a7xtBre4-IQ7kNvwFM5olE&_nc_oc=AdoCG1DLi4yCTVHzIRsOHXCJOCP7JLvZGiaFr2FUwZ3LCIzyfwbumImBU9j7NRRbRxQ&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=N4I3S0_MMa3JX6g0qlLA0A&_nc_ss=7b2a8&oh=00_AQDpGHAI-fB5bHzEL93A9saDs35HREFmezUhBWDHUl4eAA&oe=6A65B28D" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/648636447_26307105258918814_634224483599405055_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=CIv6kU2K19MQ7kNvwFmYARl&_nc_oc=Adq-r5220r-R3gbAR803yyNPb3UaHDAMu93XMy5iw72mvanOquyA2RBOVcp8mTkossQ&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=6PeSth8Ol0d-r3Dw7In-eg&_nc_ss=7b2a8&oh=00_AQB9U6D5mc1dCYE_Pun8JuEGX4HEqokeGL8HAqAL4EMsGQ&oe=6A65CB7A" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646297579_26312195908409749_3679651019268647155_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1535&ctp=s2048x1535&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=kFqq98zUvwAQ7kNvwFGTfGh&_nc_oc=AdoKupwtt8Gq3UAXM2Be9CAXBHC08Up3oq_jG_13Q1IguYYJMoU4pZpGM-gPhh-YalQ&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=FU6Xd43nXnMT7lH74y6AEw&_nc_ss=7b2a8&oh=00_AQAsJiQBR_OC-U13WMAwpXtxpwVQoPFzFCrf2MRigLmc7g&oe=6A65CC38" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/646500046_26321333927495947_2049553866831947714_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=TTWEfcSXQ34Q7kNvwHu3Dn-&_nc_oc=AdpguoVqN5tJHlsM1ybRjwYTd1teMKtx5_Xk-oBkFfjJIVOREaWLJpK3thQkqw1QkpM&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=Zk2SW6PjAqBwpQVWUyCRZw&_nc_ss=7b2a8&oh=00_AQCOCHWHPy1wcOI3GAXwjyTn2zdVubHCAwLPUI6KaDPnZQ&oe=6A65AE7D" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/647728713_26321100310852642_1457669952634278640_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x2002&ctp=s2048x2002&_nc_cat=110&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=reYTnK5aAPkQ7kNvwFONyC4&_nc_oc=AdohOe-jc8p5LT98aPMs-ogIQ17aENpSkpzskGXZ3RCiKGVHUDWc1IN7FqMli4VsLh4&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=U4i-PPU1Cw4NPVm1TsBpgw&_nc_ss=7b2a8&oh=00_AQB6LtjEGuzU1M1jzR1breng3BOpoovLSy6WIupIEfQtVA&oe=6A65C07C" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646387879_26323738043922202_2901732819255406332_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1684&ctp=s2048x1684&_nc_cat=101&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=zXL9sLHzwM4Q7kNvwFmOUJM&_nc_oc=AdonEb8ptFdwxdFWnjpY_pFaH6iEWM4PuJecVtkERg_LG0uHOQddzCBf9h_Bnd6rKgE&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=KTH4TlH7pDggS2glqED7tw&_nc_ss=7b2a8&oh=00_AQCJ6XkPa6jjbSu50mdL3O4tT4VrvUl_m7i70qUqpHAUBA&oe=6A65D5FE" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/490570320_9812054968850437_5435472928682342442_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx719x545&ctp=s719x545&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=vwEys0PPbLUQ7kNvwHNE1aO&_nc_oc=AdoOeEP65mnKsxA8UbwnfckyPk38-VaSUelso11b_mnPRo_QOAYbTuPWdkA99llP98U&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=8FqRsjey_cEM0tcZZOIYTw&_nc_ss=7b2a8&oh=00_AQA2Y9xLqURhtAjGgxR9d6b5h9aKXIQiGjTYdh5FaxIpDA&oe=6A65B3B0" height="200px" width="250px">
-        </div>
-        <div>
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/246041877_4644811635574822_111909297884825786_n.jpg?stp=dst-jpg_tt6&cstp=mx714x713&ctp=s714x713&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=koTVbDEQDLcQ7kNvwF-xEGw&_nc_oc=Adp6THSOChmnGOuOtBRvWR704y3YBbZAnoOgArSsjFf5UNYGyGsiNz-_WmgFPsFiYjU&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=CTcQR8kbmZBc9QADY-o9rw&_nc_ss=7b2a8&oh=00_AQDQQZ0ce2VN5Kcy0mkcAs6Zbi9VbVQT1SVyl9YHhk-rMw&oe=6A65A26A" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.6435-9/95322733_3093822927340375_3730886529229258752_n.jpg?stp=dst-jpg_tt6&cstp=mx960x720&ctp=s960x720&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=mlQPkkW9LksQ7kNvwHB0Erw&_nc_oc=Adp5F1Jh3CHY3DLrYikKI54jee5xjki7Gf4m8ynzmFqkzR7osC3QDLl2NoUkOFvruNc&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=F6Wo_BNUxy0cRQ405x5aDw&_nc_ss=7b2a8&oh=00_AQAswjBmNaDHCNzfg0zkdauPxn6rHLqojUnOUbpl67r3UQ&oe=6A7B3FFC" height="200px" width="300px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t1.6435-9/79484091_2776064189116252_1167334031872753664_n.jpg?stp=dst-jpg_tt6&cstp=mx821x960&ctp=s821x960&_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=w9sZ58RhvoQQ7kNvwHKOjms&_nc_oc=AdrohGbMCaJKYSFdITKq6J1B7Q9cCRRLeuVgbtErGE9h7Sg57kP5WaLsJtVd361bemc&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=TkWUYMFytJEUnj2Kcc5F_Q&_nc_ss=7b2a8&oh=00_AQAHk6hOWNC1NPYGT2Txpo1CfC0J2UYyTL-xnIC9hU0QIg&oe=6A7B245F" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646297579_26312195908409749_3679651019268647155_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1535&ctp=s2048x1535&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=jQBQUK9niB8Q7kNvwHE6_hF&_nc_oc=AdqldjmXPlPeLwIUP5kaVv8vWBvWbZZ8dRszzxnVUpHcQq3JVVb6Wk70ztFD2chk3Yg&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=q8g9OAkmZ_7VAkqFoEZptA&_nc_ss=7b2a8&oh=00_AQAFsNmr1wG-E_0bsUzqf7V8oaQCVoq2dMbgBnOko_ArbA&oe=6A59B678" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/618300230_25647484324938275_5344263036421444305_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1693x2048&ctp=s1693x2048&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Pphpm5YXnxYQ7kNvwHvhcPk&_nc_oc=AdqsrR47ro040ItIeSJGW3rM6-KDhxb4sLtXTCzydx6cLhSOmzIh525GrYhMFzUGcr0&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=rEHvQnchAHLyUhskZ5wI7Q&_nc_ss=7b2a8&oh=00_AQBUzosaxC5rmqv_LQ8SfjmPK5pygcUe0Z4kl3Qi9_McCA&oe=6A599B53" height="200px" width="250px">
-        </div>
-        <div>
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/246041877_4644811635574822_111909297884825786_n.jpg?stp=dst-jpg_tt6&cstp=mx714x713&ctp=s714x713&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=koTVbDEQDLcQ7kNvwF-xEGw&_nc_oc=Adp6THSOChmnGOuOtBRvWR704y3YBbZAnoOgArSsjFf5UNYGyGsiNz-_WmgFPsFiYjU&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=CTcQR8kbmZBc9QADY-o9rw&_nc_ss=7b2a8&oh=00_AQDQQZ0ce2VN5Kcy0mkcAs6Zbi9VbVQT1SVyl9YHhk-rMw&oe=6A65A26A" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/597637243_25565280116434669_6249558448435226843_n.jpg?stp=dst-jpg_tt6&cstp=mx595x720&ctp=s595x720&_nc_cat=101&ccb=1-7&_nc_sid=b04a48&_nc_ohc=2xvmeGAh1jwQ7kNvwGS3sbX&_nc_oc=AdqwU_v2Xj2JLG5N23eMaKMdaSPIcybRmC-k1upVuVbvykjI7zI-IECPFqNQStNDUlI&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=dvGgpTB9e9QtPLLsV-qo1w&_nc_ss=7b2a8&oh=00_AQCD8BzYCNZfb6AL1jNvS1-SFqzJs6SUjuEa3BT6buaX3g&oe=6A65D9D6" height="200px" width="250px">
-        </div>
-         <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/558927184_24965152453114108_6729884542246658839_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1638&ctp=s2048x1638&_nc_cat=109&ccb=1-7&_nc_sid=b04a48&_nc_ohc=kLlolUDuAAAQ7kNvwGCxGsc&_nc_oc=AdqWwXL31Fi7YfRyZi6PsP7PTKpaebMSXh57a3J0wRU_GkT4cSN4w52s_SjWO1vnsqU&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=82wjD6wYXaDkSSJM7MnHmQ&_nc_ss=7b2a8&oh=00_AQButfCDDycQUdduAhk1az44aDF4NP_GIUGRwi_1meVQLg&oe=6A65B8E3" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/641439471_26249912144638126_6148776050827203919_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=106&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=W8Li5KNEpMIQ7kNvwFAFK_n&_nc_oc=AdqbS0SdrlmbQO_tric05jwMHKacoM_k31ilfo-kyIifiwoIP97n5B7-J0oSLUoJGrs&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=ZtNsEU3Dc5IxfjZmlGpiHw&_nc_ss=7b2a8&oh=00_AQBIcCK8iN-sviNVfqLwz9Qovu9SV1dZ9bgrfnffVDJTYg&oe=6A65AE51" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/644182764_26252513471044660_6009731787792664642_n.jpg?stp=dst-jpg_tt6&cstp=mx1136x852&ctp=s1136x852&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=o6i2ryH8Lr0Q7kNvwHeWSLI&_nc_oc=AdpO5sdAMWljOyZtr-DYecyiAnijT1F5WtkvRYHus-9NPua5enIJpgnK-0o5HEq5ZSY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=Oaq2HZ-yaETpl6rrmtb19A&_nc_ss=7b2a8&oh=00_AQCVDY5U7hEoc_kuFzmbMXOtYN-TabIkWBvrU0dte1BAHQ&oe=6A65E34D" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/647141726_26290301893932484_1360626626921787370_n.jpg?stp=dst-jpg_tt6&cstp=mx852x1136&ctp=s852x1136&_nc_cat=104&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=WxGvSyXrwL0Q7kNvwEgqlbp&_nc_oc=AdrOuE2gYq0UgnA9ZQnyeKPcGzOmLqLcb21DEv_Asj86uzR28bGybN3Rovy5XibtjMY&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=3IEkncMUGWW9Z6Ackc3jXQ&_nc_ss=7b2a8&oh=00_AQD18mpl_qFfrrB1rKGgnc3BbQniUTVlRnB0t39qAf_GYg&oe=6A65B7FF" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/643963811_26298578479771492_6082615798755836108_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=103&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=8a7xtBre4-IQ7kNvwFM5olE&_nc_oc=AdoCG1DLi4yCTVHzIRsOHXCJOCP7JLvZGiaFr2FUwZ3LCIzyfwbumImBU9j7NRRbRxQ&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=N4I3S0_MMa3JX6g0qlLA0A&_nc_ss=7b2a8&oh=00_AQDpGHAI-fB5bHzEL93A9saDs35HREFmezUhBWDHUl4eAA&oe=6A65B28D" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/648636447_26307105258918814_634224483599405055_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=CIv6kU2K19MQ7kNvwFmYARl&_nc_oc=Adq-r5220r-R3gbAR803yyNPb3UaHDAMu93XMy5iw72mvanOquyA2RBOVcp8mTkossQ&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=6PeSth8Ol0d-r3Dw7In-eg&_nc_ss=7b2a8&oh=00_AQB9U6D5mc1dCYE_Pun8JuEGX4HEqokeGL8HAqAL4EMsGQ&oe=6A65CB7A" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646297579_26312195908409749_3679651019268647155_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1535&ctp=s2048x1535&_nc_cat=105&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=kFqq98zUvwAQ7kNvwFGTfGh&_nc_oc=AdoKupwtt8Gq3UAXM2Be9CAXBHC08Up3oq_jG_13Q1IguYYJMoU4pZpGM-gPhh-YalQ&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=FU6Xd43nXnMT7lH74y6AEw&_nc_ss=7b2a8&oh=00_AQAsJiQBR_OC-U13WMAwpXtxpwVQoPFzFCrf2MRigLmc7g&oe=6A65CC38" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/646500046_26321333927495947_2049553866831947714_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=TTWEfcSXQ34Q7kNvwHu3Dn-&_nc_oc=AdpguoVqN5tJHlsM1ybRjwYTd1teMKtx5_Xk-oBkFfjJIVOREaWLJpK3thQkqw1QkpM&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=Zk2SW6PjAqBwpQVWUyCRZw&_nc_ss=7b2a8&oh=00_AQCOCHWHPy1wcOI3GAXwjyTn2zdVubHCAwLPUI6KaDPnZQ&oe=6A65AE7D" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/647728713_26321100310852642_1457669952634278640_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x2002&ctp=s2048x2002&_nc_cat=110&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=reYTnK5aAPkQ7kNvwFONyC4&_nc_oc=AdohOe-jc8p5LT98aPMs-ogIQ17aENpSkpzskGXZ3RCiKGVHUDWc1IN7FqMli4VsLh4&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=U4i-PPU1Cw4NPVm1TsBpgw&_nc_ss=7b2a8&oh=00_AQB6LtjEGuzU1M1jzR1breng3BOpoovLSy6WIupIEfQtVA&oe=6A65C07C" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-2.xx.fbcdn.net/v/t39.30808-6/646387879_26323738043922202_2901732819255406332_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1684&ctp=s2048x1684&_nc_cat=101&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=zXL9sLHzwM4Q7kNvwFmOUJM&_nc_oc=AdonEb8ptFdwxdFWnjpY_pFaH6iEWM4PuJecVtkERg_LG0uHOQddzCBf9h_Bnd6rKgE&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=KTH4TlH7pDggS2glqED7tw&_nc_ss=7b2a8&oh=00_AQCJ6XkPa6jjbSu50mdL3O4tT4VrvUl_m7i70qUqpHAUBA&oe=6A65D5FE" height="200px" width="250px">
-        </div>
-        <div class="cards">
-            <img class="photo" src="https://scontent-atl3-3.xx.fbcdn.net/v/t39.30808-6/490570320_9812054968850437_5435472928682342442_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx719x545&ctp=s719x545&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=vwEys0PPbLUQ7kNvwHNE1aO&_nc_oc=AdoOeEP65mnKsxA8UbwnfckyPk38-VaSUelso11b_mnPRo_QOAYbTuPWdkA99llP98U&_nc_zt=23&_nc_ht=scontent-atl3-3.xx&_nc_gid=8FqRsjey_cEM0tcZZOIYTw&_nc_ss=7b2a8&oh=00_AQA2Y9xLqURhtAjGgxR9d6b5h9aKXIQiGjTYdh5FaxIpDA&oe=6A65B3B0" height="200px" width="250px">
-        </div>
-    </div>
+<div class="container">
+<div id="startScreen">
+
+<h1> Shri Krishna Pranami Religion Quiz</h1>
+
+<p>Enter your information to begin</p>
+
+<input id="playerName" placeholder="Your Full Name">
+
+<div class="infoRow">
+
+ <input id="playerAge" placeholder="Your Age" type="number">
+
+ <input id="playerplace" placeholder="Where are you from">
+
+</div>
+<button onclick="startQuiz()">
+🚀 Start Quiz
+</button>
+
+</div>
+<div id="quizScreen" style="display:none;">
+
+<div class="quizImages">
+ <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZBdZ5vO3oSivN7Al5osVmQuM0KkFFD_hMxIFA08d0Jw&s=10" class="leftLogo">
+ <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTskyMkN3v0PTcsxF92la9u3HVT0pRQ0CZGibFvJMKeNQ&s=10" class="centerLogo">
+ <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcpE1-abOXcfUcwUBNvyOmgPZOJVKEClRoWedT0JtXTw&s=10" class="rightLogo">
+</div>
+
+<div class="quiz-header">
+
+<h4 style="color: #f8f4f4;">वन्दौं सतगुरु चरणको, करूं प्रेम प्रणाम । अशुभ हरण मंगल करण, श्रीदेवचन्द्रजी नाम ।। 
+ श्री प्राणनाथ निजमूलपति, श्री मेहेराज सुनाम । तेजकुंवरी श्यामा युगल, पल पल करूं प्रणाम ।।
+</h4>
+
+
+</div>
+
+<button id="darkButton">🌙</button>
+<div class="progress">
+<span id="progressBar"></span>
+
+</div>
+<div class="local-time">
+ Local Time: <span id="localTime"></span>
+</div>
+<div class="timer">
+ Time Left:
+ <span id="time">30</span>
+</div>
+
+<div class="counter">
+ Question <span id="current">1</span>
+ of
+ <span id="total"></span>
+</div>
+<div id="quizArea">
+
+<div class="question">
+
+<h2> Who is the first Sundersath?</h2>
+
+<label class="option">
+<input type="radio" name="q1" value="0">
+Ganjibhai
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="1">
+MotaBhai
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="2">
+Ramji
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="3">
+None of the above
+</label>
+
+</div>
+
+
+<div class="question">
+
+<h2> What is the Shri Krishna Pranami Holy Book name?</h2>
+
+<label class="option">
+<input type="radio" name="q2" value="0">
+Bible
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="1">
+Sarup Shaheb
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="2">
+Gita
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="3">
+Mahabharat
+</label>
+</div>
+<div class="question">
+ <h2> Who is the god known for playing the flute?</h2>
+
+<label class="option">
+<input type="radio" name="q3" value="0">
+Shri Krishna
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="1">
+Shivaji
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="2">
+Hanumanji
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="3">
+Ganeshaji
+</label>
+
+</div>
+<div class="question">
+ <h2> Which festival is widely known as the festival of lights?</h2>
+
+ <label class="option">
+ <input type="radio" name="q4" value="0">
+ Holi
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q4" value="1">
+ Diwali
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q4" value="2">
+ Navratri
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q4" value="3">
+ Janmashtami
+ </label>
+</div>
+<div class="question">
+ <h2> What is Shri Krishna Pranami Dharma?</h2>
+
+ <label class="option">
+ <input type="radio" name="q5" value="0">
+ A path followedonly by monks
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q5" value="1">
+ A tradition based only on rituals
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q5" value="2">
+ Path of Devotion, Truth, and Universal Harmony
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q5" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2> Who founded the Nijanand Sampradaya?</h2>
+
+ <label class="option">
+ <input type="radio" name="q6" value="0">
+ Satguru Shri DevchandraJi Maharaj 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q6" value="1">
+ Shri Chhatrasal MaharajJi 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q6" value="2">
+ Mahamati Shri PrannathJi 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q6" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2> Who is Mahamati Shri Prannath Ji?</h2>
+
+ <label class="option">
+ <input type="radio" name="q7" value="0">
+ The founder of the Nijanand Sampradaya
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q7" value="1">
+ The Great Spiritual Shri Tartam Shagar Teacher of the Shri Krishna Pranami tradition 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q7" value="2">
+ The author of the Bhagavad Gita 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q7" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2> What is the holy scripture of the tradition?</h2>
+
+ <label class="option">
+ <input type="radio" name="q8" value="0">
+ Shri Tartam Sagar (Kuljam Swaroop)
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q8" value="1">
+ Mahabharata 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q8" value="2">
+ Ramayana
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q8" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2> Who is worshipped in Shri Krishna Pranami Dharma?</h2>
+
+ <label class="option">
+ <input type="radio" name="q9" value="0">
+ Only one religion is true 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q9" value="1">
+ People should never learn about other religions
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q9" value="2">
+ The Supreme God Shri Rajshymaji Shri Krishnaji
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q9" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2> Who is worshipped in Shri Krishna Pranami Dharma?</h2>
+
+ <label class="option">
+ <input type="radio" name="q10" value="0">
+ Only one religion is true 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q10" value="1">
+ People should never learn about other religions
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q10" value="2">
+ The Supreme God Shri Rajshymaji Shri Krishnaji
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q10" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2>What is one important principle of the tradition?</h2>
+ <label class="option">
+ <input type="radio" name="q11" value="0">
+ Love, Peace, Respect and Non-violence Non-violence (Ahimsa)
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q11" value="1">
+ Revenge 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q11" value="2">
+ Peace
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q11" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2>Where is Shri Padmavati Puri Dham ?</h2>
+ <label class="option">
+ <input type="radio" name="q12" value="0">
+ Rajkot, Gujarat
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q12" value="1">
+ Panna, Madhya Pradesh, India
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q12" value="2">
+ Varanasi, Uttar Pradesh
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q12" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2>Where is Shri 5 Navtanpuri Dham?</h2>
+ <label class="option">
+ <input type="radio" name="q13" value="0">
+ Rajkot, Gujarat
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q13" value="1">
+ Jamnagar Gujarat
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q13" value="2">
+ Gangtok Sikkim
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q13" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2>What is another name for Tartam Sagar? </h2>
+ <label class="option">
+ <input type="radio" name="q14" value="0">
+ Ramcharitmanas
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q14" value="1">
+ Shri Kuljam Swaroop 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q14" value="2">
+ Vedas 
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q14" value="3">
+ None of the above
+ </label>
+</div>
+<div class="question">
+ <h2>When was Shri Devchandraji Maharaj born?</h2>
+ <label class="option">
+ <input type="radio" name="q15" value="0">
+ .October 11, 1581 A.D
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q15" value="1">
+ .October 11,1618 A.D.
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q15" value="2">
+ January 1, 1600 A.D.
+ </label>
+
+ <label class="option">
+ <input type="radio" name="q15" value="3">
+ None of the above
+ </label>
+</div>
+</div>
+
+<button id="submitButton" onclick="nextQuestion()">
+ Submit Answer
+</button>
+
+<button id="nextButton" onclick="goToNextQuestion()" style="display:none;">
+ Next Question
+</button>
+
+</div>
 </div>
 
 <script>
-const photos = document.querySelectorAll(".photo");
-const overlay = document.getElementById("overlay");
-const bigImage = document.getElementById("bigImage");
-const slider = document.querySelector(".myfam2");
+ let correctSound = new Audio(
+"https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+);
 
 
-photos.forEach(photo => {
+let wrongSound = new Audio(
+"https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"
+);
+ let currentQuestion = 0;
+let score = 0;
+let playerName = "";
+let playerAge = "";
 
-    photo.addEventListener("click", () => {
+// =====================================
+// GOOGLE APPS SCRIPT RESULT EMAIL
+// =====================================
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykFCYY2ZyqAfaSQZBitEU2iWavfNcFpyKHuXNcjIBP5fdqLEv1OI1w5zHehHiVr-KdqA/exec";
+let resultEmailSent = false;
 
-        bigImage.src = photo.src;
+function sendResultEmail(percentage) {
+  if (resultEmailSent) return;
+  resultEmailSent = true;
 
-        overlay.style.display = "flex";
+  const placeElement = document.getElementById("playerplace");
+  const playerPlace = placeElement ? placeElement.value : "";
 
-        slider.style.animationPlayState = "paused";
+  const total = totalQuestions;
+  const correct = score;
+  const wrong = total - correct;
 
-    });
+  const resultData = {
+    studentName: playerName,
+    age: playerAge,
+    place: playerPlace,
+    totalQuestions: total,
+    correct: correct,
+    wrong: wrong,
+    score: correct,
+    percentage: percentage
+  };
 
-});
-
-
-overlay.addEventListener("click", () => {
-
-    overlay.style.display = "none";
-
-    slider.style.animationPlayState = "running";
-
-});
-function updateClock() {
-    time.innerHTML = new Date().toLocaleTimeString();
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(resultData),
+    mode: "no-cors"
+  })
+  .then(function() {
+    console.log("Quiz result sent to Gmail.");
+  })
+  .catch(function(error) {
+    console.error("Could not send quiz result:", error);
+  });
 }
 
-updateClock();
-setInterval(updateClock, 1000);
 
-const today = new Date ();
 
-const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+let questions = Array.from(document.querySelectorAll(".question"));
+let totalQuestions = questions.length;
+document.getElementById("total").innerHTML = totalQuestions;
+let correctAnswers = [
+ 0, 1, 0, 1, 2,
+ 0, 1, 0, 2, 2,
+ 0, 1, 1, 1, 0,
+ 
+];
+
+let quizItems = questions.map((question, index) => ({
+ question: question,
+ answer: correctAnswers[index]
+}));
+
+quizItems.sort(() => Math.random() - 0.5);
+
+questions = quizItems.map(item => item.question);
+correctAnswers = quizItems.map(item => item.answer);
+
+questions.forEach(question => {
+ document.getElementById("quizArea").appendChild(question);
+});
+
+let progressBar = document.getElementById("progressBar");
+
+let timer;
+let timeLeft = 30;
+let autoNextTimer;
+
+questions.forEach((question,index)=>{
+ if(index !== 0){
+ question.style.display = "none";
+ }
+});
+
+
+
+function startTimer(){
+
+ clearInterval(timer);
+
+ timeLeft = 30;
+document.querySelector(".timer").classList.remove("warning");
+ document.getElementById("time").innerHTML = timeLeft;
+
+
+ timer = setInterval(()=>{
+
+ timeLeft--;
+
+ document.getElementById("time").innerHTML = timeLeft;
+
+
+ if(timeLeft <= 5){
+ document.querySelector(".timer")
+ .classList.add("warning");
+ }
+
+
+ if(timeLeft <= 0){
+
+ clearInterval(timer);
+timeOut();
+
+ }
+
+
+ },1000);
+
+}
+
+
+function nextQuestion() {
+ let selected = questions[currentQuestion].querySelector(
+ 'input[type="radio"]:checked'
+ );
+
+ if (!selected) {
+ alert("Choose an answer first!");
+ return;
+ }
+
+ clearInterval(timer);
+
+ let feedback = document.getElementById("feedback");
+
+ if (Number(selected.value) === correctAnswers[currentQuestion]) {
+ score++;
+ correctSound.play();
+ createConfetti();
+
+ feedback.innerHTML = "✅ Correct!";
+ feedback.className = "feedback show correct";
+ } else {
+ wrongSound.play();
+
+ feedback.innerHTML = "❌ Wrong!";
+ feedback.className = "feedback show wrong";
+ }
+
+ setTimeout(() => {
+ feedback.className = "feedback";
+ goToNextQuestion();
+ }, 700);
+}
+
+function timeOut() {
+ let question = questions[currentQuestion];
+
+ let correctInput = question.querySelector(
+ `input[value="${correctAnswers[currentQuestion]}"]`
+ );
+
+ correctInput.closest(".option").classList.add("correct-answer");
+
+ question.querySelectorAll("input").forEach(input => {
+ input.disabled = true;
+ });
+
+ document.getElementById("submitButton").style.display = "none";
+ document.getElementById("nextButton").style.display = "inline-block";
+
+ autoNextTimer = setTimeout(() => {
+ goToNextQuestion();
+ }, 10000);
+
+ if (currentQuestion === totalQuestions - 1) {
+ document.getElementById("nextButton").innerHTML = "See Results";
+ }
+}
+
+function goToNextQuestion() {
+ clearTimeout(autoNextTimer);
+ document.getElementById("submitButton").style.display = "inline-block";
+ document.getElementById("nextButton").style.display = "none";
+
+ questions[currentQuestion].style.display = "none";
+ currentQuestion++;
+
+ progressBar.style.width =
+ (currentQuestion / totalQuestions) * 100 + "%";
+
+ document.getElementById("current").innerHTML = currentQuestion + 1;
+
+ if (currentQuestion < totalQuestions) {
+ questions[currentQuestion].style.display = "block";
+ startTimer();
+ } else {
+ showResult();
+ }
+}
+
+
+
+function showResult() {
+ clearInterval(timer);
+
+ let accuracy = Math.round((score / totalQuestions) * 100);
+
+  // Send the final result to the teacher's Gmail
+  sendResultEmail(accuracy);
+
+ let message;
+
+ if (accuracy >= 90) {
+ message = "🏆 Religion Master!";
+ } else if (accuracy >= 70) {
+ message = "🥇 Great Scholar!";
+ } else if (accuracy >= 50) {
+ message = "📚 Keep Learning!";
+ } else {
+ message = "💪 Practice More!";
+ }
+
+ saveScore();
+
+ let stageButton;
+
+ if (accuracy >= 80) {
+ stageButton = `
+ <button onclick="startStage2()">
+ 🚀 Continue to Stage 2
+ </button>
+ `;
+ } else {
+ stageButton = `
+ <button onclick="location.reload()">
+ 🔄 Restart Stage 1
+ </button>
+ `;
+ }
+
+ document.querySelector(".container").innerHTML = `
+ <div class="result">
+ <h1>🎉 Stage 1 Complete!</h1>
+
+ <div class="score-circle" id="scoreCircle">0%</div>
+
+ <h2>${message}</h2>
+
+ <p>You got ${score} / ${totalQuestions} correct!</p>
+
+ <h2>🏆 Stage 1 Leaderboard</h2>
+ <div id="leaderboard"></div>
+
+ ${stageButton}
+ </div>
+ `;
+
+ animateScore(accuracy);
+ loadLeaderboard();
+}
+
+function animateScore(number) {
+ let count = 0;
+
+ let animation = setInterval(() => {
+ count++;
+
+ document.getElementById("scoreCircle").innerHTML = count + "%";
+
+ if (count >= number) {
+ clearInterval(animation);
+ }
+ }, 20);
+}
+
+function saveScore(){
+
+ let today = new Date().toDateString();
+
+ let savedDate = localStorage.getItem("leaderboardDate");
+
+ 
+ if(savedDate !== today){
+ localStorage.removeItem("scores");
+ localStorage.setItem("leaderboardDate", today);
+ }
+
+ let name = playerName;
+
+ if(name === ""){
+ alert("Enter your name!");
+ return;
+ }
+
+ let scores = JSON.parse(localStorage.getItem("scores")) || [];
+
+ scores.push({
+ name: name,
+ score: Math.round((score / totalQuestions) * 100)
+ });
+
+ scores.sort((a,b)=>b.score-a.score);
+
+ localStorage.setItem("scores", JSON.stringify(scores));
+
+ loadLeaderboard();
+
+}
+
+
+
+
+function createConfetti(){
+
+
+ for(let i=0;i<80;i++){
+
+
+ let piece=document.createElement("div");
+
+
+ piece.className="confetti";
+
+
+ piece.style.left =
+ Math.random()*100+"vw";
+
+
+ piece.style.background =
+ "hsl("+Math.random()*360+",100%,50%)";
+
+
+
+ document.body.appendChild(piece);
+
+
+
+ setTimeout(()=>{
+
+ piece.remove();
+
+ },2000);
+
+
+ }
+
+
+}
+
+
+
+
+
+let darkButton = document.getElementById("darkButton");
+
+
+darkButton.onclick = function(){
+
+ document.body.classList.toggle("dark");
+
+
+ if(document.body.classList.contains("dark")){
+
+ darkButton.innerHTML="☀️";
+
+ }else{
+
+ darkButton.innerHTML="🌙";
+
+ }
+
 };
+function loadLeaderboard(){
 
-document.getElementById("dadate").textContent =
-today.toLocaleDateString('en-us', options);
+ let today = new Date().toDateString();
+
+let savedDate = localStorage.getItem("leaderboardDate");
+
+if(savedDate !== today){
+ localStorage.removeItem("scores");
+ localStorage.setItem("leaderboardDate", today);
+}
+
+let scores =
+JSON.parse(localStorage.getItem("scores")) || [];
+
+
+let board="";
+
+
+scores.slice(0,5).forEach((player,index)=>{
+
+board += `
+<p>
+🏅 ${index+1}. ${player.name}
+- ${player.score}
+
+</p>
+`;
+
+});
+
+
+if(document.getElementById("leaderboard")){
+
+document.getElementById("leaderboard").innerHTML =
+"<h2>🏆 Top Players</h2>" + board;
+
+}
+
+}
+function createBackground(){
+
+ let background = document.getElementById("background");
+
+ for(let i=0;i<25;i++){
+
+ let circle = document.createElement("div");
+
+ circle.className = "circle";
+
+ let size = Math.random()*120 + 40;
+
+ circle.style.width = size + "px";
+ circle.style.height = size + "px";
+
+ circle.style.left = Math.random()*100 + "vw";
+
+ circle.style.background =
+ "hsla(" +
+ Math.random()*360 +
+ ",100%,70%,0.45)";
+
+ circle.style.animationDuration =
+ (Math.random()*12 + 8) + "s";
+
+ circle.style.animationDelay =
+ Math.random()*8 + "s";
+
+ background.appendChild(circle);
+
+ }
+
+}
+
+createBackground();
+
+function startQuiz(){
+
+ playerName = document.getElementById("playerName").value;
+
+ playerAge = document.getElementById("playerAge").value;
+
+
+ if(playerName == "" || playerAge == ""){
+
+ alert("Enter your name and age!");
+
+ return;
+
+ }
+
+
+ document.getElementById("startScreen").style.display="none";
+
+ document.getElementById("quizScreen").style.display="block";
+
+ startTimer(); 
+}
+function viewLeaderboard(){
+
+ let scores =
+ JSON.parse(localStorage.getItem("scores")) || [];
+
+ let board="";
+
+ scores.slice(0,5).forEach((player,index)=>{
+
+ board += `
+ <p>
+ 🏅 ${index+1}. ${player.name}
+ - ${player.score}%
+ </p>
+ `;
+
+ });
+
+
+ document.querySelector(".container").innerHTML = `
+
+ <div class="result">
+
+ <h1>🏆 Leaderboard</h1>
+
+ ${board}
+
+ <button onclick="location.reload()">
+ 🔄 Back
+ </button>
+
+ </div>
+
+ `;
+
+}
+function updateLocalTime() {
+ let clock = document.getElementById("localTime");
+
+ if (clock) {
+ clock.innerHTML = new Date().toLocaleTimeString();
+ }
+}
+
+updateLocalTime();
+setInterval(updateLocalTime, 1000);
+
+function startStage2() {
+ alert("Great job! Stage 2 will begin here.");
+}
 </script>
 
 
-</script>
 </body>
 </html>
